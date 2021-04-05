@@ -1,0 +1,25 @@
+@import '../node_modules/@pluralsight/ps-design-system-normalize';
+
+body {
+  color: #ffffff;
+  background-color: var(--psColorsBackgroundDark1);
+}
+
+.course {
+  background: var(--psColorsBackgroundDark3);
+  list-style-type: none;
+  border: 1px solid var(--psColorsBorderHighOnDark);
+  margin: 20px;
+  padding: 20px;
+  display: inline-block;
+  min-width: 150px;
+}
+
+.course strong {
+  color: #9b9b9b;
+  font-weight: bold;
+}
+
+.loading {
+  margin: 20px;
+}
