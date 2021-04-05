@@ -2,6 +2,9 @@ const courseDb = require('./course-db')
 const courseApi = require('./course-api')
 
 async function get(courseId) {
+
+  await courseDb.clearCacheOlderThanOneDay()
+
   const result = await courseDb.get(courseId)
 
   if (result)
