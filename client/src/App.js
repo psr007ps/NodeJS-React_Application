@@ -3,6 +3,15 @@ import Theme from '@pluralsight/ps-design-system-theme'
 import CircularProgress from '@pluralsight/ps-design-system-circularprogress'
 import "./App.css"
 
+const url = window.location.href
+const lastPart = url.substr(url.lastIndexOf('/') + 1)
+console.log(lastPart)
+let urlToFetch = 'http://localhost:5000/courses'
+if (lastPart)
+  urlToFetch += '/' + lastPart
+else
+  urlToFetch += '/1'
+
 export default class App extends React.Component {
   constructor(props) {
     super(props)
@@ -12,7 +21,7 @@ export default class App extends React.Component {
     }
   }
   componentDidMount() {
-    fetch('http://localhost:5000/courses/1')
+    fetch(urlToFetch)
       .then(res => res.json())
       .then(course => this.setState({ course: course }))
   }
