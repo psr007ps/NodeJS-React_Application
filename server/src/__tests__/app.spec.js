@@ -21,7 +21,7 @@ describe('app', () => {
 
   describe('GET /course/:id', () => {
     it('gets a course by ID', async () => {
-      const course = { id: '42', title: 'ultimate question of life' }
+      const course = { id: '42', title: 'ultimate question of life', tags:'question,life' }
       await courseDb.upsert(course)
 
       const res = await request(app)

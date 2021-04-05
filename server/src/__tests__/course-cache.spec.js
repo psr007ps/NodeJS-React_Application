@@ -14,14 +14,14 @@ describe('course-cache', () => {
 
   describe('#get', () => {
     it('gets data from the db', async () => {
-      const course = { id: 'such', title: 'test' }
+      const course = { id: 'such', title: 'test', tags:'test' }
       courseDb.get.mockResolvedValue(course)
 
       const result = await subject.get(course.id)
 
       expect(result).toEqual(course)
       expect(courseDb.get).toHaveBeenCalledWith(course.id)
-
+      expect(courseDb.clearCacheOlderThanOneDay).toBeCalled()
       expect(courseDb.upsert).not.toBeCalled()
       expect(courseApi.get).not.toBeCalled()
     })
@@ -29,13 +29,14 @@ describe('course-cache', () => {
     describe('when course is not cached', () => {
       describe('when the source of truth returns a value', () => {
         it('gets and saves the course', async () => {
-          const course = { id: 'very', title: 'mock' }
+          const course = { id: 'very', title: 'mock', tags:'something' }
           courseDb.get.mockResolvedValue(null)
           courseApi.get.mockResolvedValue(course)
 
           const result = await subject.get(course.id)
 
           expect(result).toEqual(course)
+          expect(courseDb.clearCacheOlderThanOneDay).toBeCalled()
           expect(courseApi.get).toHaveBeenCalledWith(course.id)
           expect(courseDb.upsert).toHaveBeenCalledWith(course)
         })
@@ -51,6 +52,7 @@ describe('course-cache', () => {
           const result = await subject.get(courseId)
 
           expect(result).toEqual(null)
+          expect(courseDb.clearCacheOlderThanOneDay).toBeCalled()
           expect(courseDb.get).toHaveBeenCalledWith(courseId)
           expect(courseApi.get).toHaveBeenCalledWith(courseId)
 

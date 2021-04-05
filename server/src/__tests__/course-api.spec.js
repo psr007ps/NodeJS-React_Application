@@ -11,12 +11,12 @@ describe('course-api', () => {
 
   describe('#get', () => {
     it('maps the response', async () => {
-      const res = { data: { title: 'course-title', description: 'amazing course' } }
+      const res = { data: { title: 'course-title', description: 'amazing course', tags: 'course' } }
       axios.get.mockResolvedValue(res)
 
       const course = await subject.get('34')
-
-      expect(course).toEqual({ id: '34', title: res.data.title })
+      console.log(course)
+      expect(course).toEqual({ id: '34', title: res.data.title, tags: res.data.tags })
     })
 
     describe('on a non-200 response', () => {
