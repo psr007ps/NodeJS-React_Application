@@ -1,3 +1,13 @@
+# Assumptions #
+
+The calls are made only to specific IDs and not to the ../courses endpoint. Anything apart from ../courses/${id} is suppose to give a generic error message.
+
+It is assumed that the api call will be not longer than ../courses/{$id}. In case the entered url is ../courses/{$id1}/{$id2}/{$id3}, the last id, i.e. id3 will be taken.
+
+The second commit with description Requirement - 2 consists of requirements 2 as well as 3.
+
+Few other libraries have been installed.
+
 # Installation #
 
 ## Server ##
