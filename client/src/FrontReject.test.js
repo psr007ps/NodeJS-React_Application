@@ -22,7 +22,7 @@ afterEach(() => {
 it("must render a loading span before api call success", () => {
   expect(wrapper.find("ForwardRef.loading").exists()).toBeTruthy()
 });
-it("must show the course details and hide the loading span after api call success", 
+it("must show the error message and hide the loading span after api call success", 
 (done) => {
 // here we are spying on componentDidMount to know that it has been called
 const spyDidMount = jest.spyOn(App.prototype,"componentDidMount");
@@ -39,7 +39,9 @@ expect(spyDidMount).toHaveBeenCalled();
 didMount.then(() => {
 //  updating the wrapper
     wrapper.update();
-    expect(wrapper.find("ForwardRef.loading").exists()).toBeTruthy()
+    expect(wrapper.find("ForwardRef.loading").length).toBe(0)
+    //console.log(wrapper.state().hasError)
+    expect(wrapper.state().hasError === true)
     spyDidMount.mockRestore();
     fetch.mockClear();
     done();

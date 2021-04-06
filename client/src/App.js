@@ -34,7 +34,8 @@ export default class App extends React.Component {
     super(props)
 
     this.state = {
-      course: null
+      course: null,
+      hasError: false
     }
   }
   
@@ -48,12 +49,13 @@ export default class App extends React.Component {
     }
     catch (err) {
       console.log(err);
+      this.setState({ hasError: true });
     }
   }
   render() {
     return (
       <Theme name={Theme.names.dark}>
-          {this.state.course ? (
+          {this.state.hasError?<h2>Something went wrong or ID does not exist</h2>:this.state.course ? (
             <ul className="course">
               <li><strong>ID:</strong> {this.state.course.id}</li>
               <li><strong>Title:</strong> {this.state.course.title}</li>
@@ -69,3 +71,5 @@ export default class App extends React.Component {
     )
   }
 }
+
+

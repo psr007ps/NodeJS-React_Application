@@ -47,6 +47,8 @@ didMount.then(() => {
     expect(wrapper.find("ForwardRef.loading").length).toBe(0)
     const getCourse = wrapper.find('ul.course').text()
     //console.log(typeof getCourse)
+    //console.log(wrapper.state().course)
+    expect(wrapper.state().course).toEqual({ id: 'rick', title: 'morty', tags: 'java,python' })
     expect(getCourse.localeCompare("ID: rickTitle: mortyTags:<ReadMore />"))
     expect(wrapper.find('ReadMore').childAt(0).text().localeCompare('java'))
     expect(wrapper.find('ReadMore').childAt(1).text().localeCompare('python'))
