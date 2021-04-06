@@ -37,10 +37,18 @@ export default class App extends React.Component {
       course: null
     }
   }
-  componentDidMount() {
-    fetch(urlToFetch)
-      .then(res => res.json())
-      .then(course => this.setState({ course: course }))
+  
+  async componentDidMount() {
+    try{
+    const res = await fetch(urlToFetch);
+    if (res === undefined || res.status >= 400)
+      throw new Error("something went wrong or ID does not exist")
+    const course = await res.json();
+    return this.setState({ course: course });
+    }
+    catch (err) {
+      console.log(err);
+    }
   }
   render() {
     return (
