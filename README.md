@@ -1,3 +1,13 @@
+# Features #
+
+Full-stack project making use of Node.js, React.js and SQLite.
+
+Fetches data from an API and displays on a React front-end.
+
+Cache is configured using LRU policy and expires in 24 hours.
+
+Application can be thoroughly tested using the described tests.
+
 # Assumptions #
 
 The calls are made only to specific IDs and not to the ../courses endpoint. Anything apart from ../courses/${id} is suppose to give a generic error message.
